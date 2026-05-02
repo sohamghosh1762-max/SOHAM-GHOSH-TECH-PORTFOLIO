@@ -1450,152 +1450,170 @@ body.light .sidebar { background: rgba(232,237,248,0.95); }
 body.light .topbar { background: rgba(232,237,248,0.9); }
 body.light .hero-name { filter: drop-shadow(0 0 20px rgba(0,144,224,0.2)); }
 
-/* ===== MOBILE RESPONSIVE COMPLETE FIX ===== */
+/* ===== PREMIUM MOBILE UI UPGRADE ===== */
 @media (max-width: 768px) {
 
-  /* Hide custom cursor */
+  /* Remove cursor */
   #cursor, #cursor-ring {
     display: none;
   }
 
-  /* Sidebar → bottom nav */
+  /* ===== BOTTOM GLASS NAVBAR ===== */
   .sidebar {
     width: 100%;
-    height: 60px;
+    height: 70px;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
     bottom: 0;
     top: auto;
-    border-right: none;
-    border-top: 1px solid var(--border);
+    border: none;
+    backdrop-filter: blur(20px);
+    background: rgba(5,13,26,0.6);
+    box-shadow: 0 -5px 30px rgba(0,212,255,0.1);
+    border-top: 1px solid rgba(0,212,255,0.2);
     z-index: 999;
   }
 
-  .sidebar-logo {
-    display: none;
-  }
-
   .nav-item {
-    width: auto;
-    height: auto;
-    font-size: 10px;
+    font-size: 11px;
+    opacity: 0.7;
+    transition: 0.3s;
   }
 
-  /* Main layout */
+  .nav-item:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    color: var(--neon);
+  }
+
+  /* ===== MAIN ===== */
   .main-content {
     margin-left: 0;
-    padding-bottom: 80px;
+    padding-bottom: 90px;
   }
 
-  /* Topbar */
+  /* ===== TOPBAR ===== */
   .topbar {
     margin-left: 0;
-    padding: 10px 12px;
+    padding: 12px;
+    backdrop-filter: blur(12px);
+    background: rgba(5,13,26,0.5);
   }
 
   .topbar-left,
   .topbar-right {
-    gap: 8px;
     font-size: 10px;
   }
 
-  /* Sections */
-  section {
-    padding: 60px 16px;
-  }
-
-  /* HERO */
+  /* ===== HERO (APP STYLE CENTER) ===== */
   #hero {
     text-align: center;
     align-items: center;
+    justify-content: center;
   }
 
   .hero-name {
-    font-size: 38px;
+    font-size: 34px;
+    line-height: 1.2;
   }
 
   .hero-role {
-    font-size: 16px;
+    font-size: 15px;
+    color: var(--blue);
   }
 
   .hero-tagline {
-    font-size: 14px;
+    font-size: 13px;
+    opacity: 0.8;
   }
 
+  /* ===== BUTTONS (TOUCH FRIENDLY) ===== */
   .hero-cta {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     align-items: center;
+    width: 100%;
   }
 
-  /* Buttons */
   .btn-primary,
   .btn-secondary {
     width: 100%;
-    text-align: center;
-    font-size: 12px;
+    padding: 12px;
+    font-size: 13px;
+    border-radius: 10px;
   }
 
-   /* Hide AI face */
+  /* ===== HIDE AI FACE ===== */
   .ai-holo,
   #scene {
     display: none !important;
   }
 
-  /* GRID FIXES */
+  /* ===== CARD UI (GLASS STYLE) ===== */
+  .project-card,
+  .pub-card {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+
+  .project-title,
+  .pub-title {
+    font-size: 15px;
+  }
+
+  .project-desc,
+  .pub-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: 0.85;
+  }
+
+  .tech-tag {
+    font-size: 10px;
+    padding: 5px 8px;
+    border-radius: 6px;
+    background: rgba(0,212,255,0.1);
+  }
+
+  /* ===== GRID STACK ===== */
   .projects-grid,
   .about-grid,
   .skills-layout,
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 18px;
     padding: 0 12px;
   }
 
-  /* PROJECT CARDS */
-  .project-card {
-    width: 100%;
-    padding: 16px;
-    border-radius: 12px;
+  /* ===== SECTION TITLE IMPROVEMENT ===== */
+  .section-title {
+    font-size: 26px;
+    text-align: center;
   }
 
-  .project-title {
-    font-size: 16px;
+  .section-tag {
+    justify-content: center;
   }
 
-  .project-desc {
-    font-size: 13px;
-    line-height: 1.5;
-  }
-
-  .tech-tag {
-    font-size: 10px;
-    padding: 4px 8px;
-  }
-
-  /* PUBLICATION CARDS */
-  .pub-card {
-    padding: 16px;
-    margin: 12px;
-  }
-
-  .pub-title {
-    font-size: 15px;
-  }
-
-  .pub-desc {
-    font-size: 13px;
-  }
-
-  /* SKILL MATRIX */
+  /* ===== SKILL ORBIT CENTER ===== */
   .solar-system {
-    width: 260px;
-    height: 260px;
-    margin: auto;
+    width: 240px;
+    height: 240px;
+    margin: 20px auto;
+  }
+
+  /* ===== SMOOTH SCROLL FEEL ===== */
+  html {
+    scroll-behavior: smooth;
   }
 
 }
-
 /* Glitch effect */
 @keyframes glitch {
   0%,100%{clip-path:none;transform:none}
