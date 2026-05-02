@@ -803,51 +803,116 @@ section {
   z-index: 10;
 }
 
-/* Orbit rings */
+/* ===== ORBIT SYSTEM (ULTRA UPGRADE) ===== */
+
 .orbit {
   position: absolute;
   top: 50%;
   left: 50%;
-  border: 1px dashed rgba(0,212,255,0.2);
   border-radius: 50%;
   transform: translate(-50%, -50%);
+  pointer-events: none;
+
+  /* Glow ring */
+  border: 1px dashed rgba(0,212,255,0.15);
+  box-shadow:
+    0 0 20px rgba(0,212,255,0.08),
+    inset 0 0 20px rgba(0,212,255,0.05);
+
+  transition: 0.3s;
 }
 
-/* Different orbit sizes */
-.orbit1 { width: 140px; height: 140px; animation: rotate 8s linear infinite; }
-.orbit2 { width: 180px; height: 180px; animation: rotate 10s linear infinite; }
-.orbit3 { width: 220px; height: 220px; animation: rotate 12s linear infinite; }
-.orbit4 { width: 260px; height: 260px; animation: rotate 14s linear infinite; }
-.orbit5 { width: 300px; height: 300px; animation: rotate 16s linear infinite; }
-.orbit6 { width: 340px; height: 340px; animation: rotate 18s linear infinite; }
+/* Hover highlight */
+.orbit:hover {
+  border-color: rgba(0,212,255,0.5);
+  box-shadow:
+    0 0 40px rgba(0,212,255,0.3),
+    inset 0 0 30px rgba(0,212,255,0.15);
+}
 
-/* Planet */
+/* ===== DIFFERENT ORBITS ===== */
+
+.orbit1 { width: 140px; height: 140px; animation: rotate 8s linear infinite; }
+.orbit2 { width: 180px; height: 180px; animation: rotateReverse 10s linear infinite; }
+.orbit3 { width: 220px; height: 220px; animation: rotate 12s linear infinite; }
+.orbit4 { width: 260px; height: 260px; animation: rotateReverse 14s linear infinite; }
+.orbit5 { width: 300px; height: 300px; animation: rotate 16s linear infinite; }
+.orbit6 { width: 340px; height: 340px; animation: rotateReverse 18s linear infinite; }
+
+/* ===== PLANET ===== */
+
 .planet {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: var(--glass);
-  border: 1px solid var(--border);
-  padding: 6px 12px;
+
+  padding: 6px 14px;
   border-radius: 20px;
   font-family: var(--font-mono);
   font-size: 11px;
+
   color: var(--blue);
-  box-shadow: 0 0 10px rgba(0,212,255,0.3);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(0,212,255,0.2);
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 0 10px rgba(0,212,255,0.2),
+    inset 0 0 10px rgba(0,212,255,0.05);
+
   white-space: nowrap;
+  pointer-events: auto;
+
+  transition: all 0.3s ease;
 }
 
+/* Glow pulse */
+.planet::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 20px;
+  background: radial-gradient(circle, rgba(0,212,255,0.2), transparent 70%);
+  opacity: 0;
+  transition: 0.3s;
+}
+
+/* Hover effect */
 .planet:hover {
-  background: rgba(0,212,255,0.2);
-  box-shadow: 0 0 20px var(--blue);
-  transform: translate(-50%, -50%) scale(1.1);
+  transform: translate(-50%, -50%) scale(1.15);
+  background: rgba(0,212,255,0.15);
+  box-shadow:
+    0 0 25px var(--blue),
+    0 0 60px rgba(0,212,255,0.4);
 }
 
-/* Rotation animation */
+.planet:hover::before {
+  opacity: 1;
+}
+
+/* ===== OPTIONAL: FLOAT EFFECT ===== */
+
+.planet {
+  animation: floatPlanet 4s ease-in-out infinite;
+}
+
+@keyframes floatPlanet {
+  0%,100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-6px); }
+}
+
+/* ===== ROTATION ===== */
+
 @keyframes rotate {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes rotateReverse {
+  from { transform: translate(-50%, -50%) rotate(360deg); }
+  to { transform: translate(-50%, -50%) rotate(0deg); }
 }
 
 /* ====== PROJECTS SECTION ====== */
