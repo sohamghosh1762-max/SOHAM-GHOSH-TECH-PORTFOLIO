@@ -1551,17 +1551,112 @@ body.light .sidebar { background: rgba(232,237,248,0.95); }
 body.light .topbar { background: rgba(232,237,248,0.9); }
 body.light .hero-name { filter: drop-shadow(0 0 20px rgba(0,144,224,0.2)); }
 
-/* ====== RESPONSIVE ====== */
+/* ===== MOBILE RESPONSIVE FIX ===== */
 @media (max-width: 768px) {
-  .sidebar { width: 52px; }
-  .main-content { margin-left: 52px; }
-  section { padding: 60px 20px; }
-  .about-grid { grid-template-columns: 1fr; }
-  .skills-layout { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .hero-metrics { gap: 16px; }
-  .topbar { padding: 10px 16px; }
-  #hero { padding: 60px 20px; }
+
+  /* Hide custom cursor */
+  #cursor, #cursor-ring {
+    display: none;
+  }
+
+  /* Sidebar → make it bottom nav */
+  .sidebar {
+    width: 100%;
+    height: 60px;
+    flex-direction: row;
+    justify-content: space-around;
+    bottom: 0;
+    top: auto;
+    border-right: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .sidebar-logo {
+    display: none;
+  }
+
+  .nav-item {
+    width: auto;
+    height: auto;
+  }
+
+  /* Main layout fix */
+  .main-content {
+    margin-left: 0;
+    padding-bottom: 70px;
+  }
+
+  .topbar {
+    margin-left: 0;
+    padding: 10px 12px;
+  }
+
+  .topbar-left,
+  .topbar-right {
+    margin-left: 0;
+    gap: 8px;
+    font-size: 10px;
+  }
+
+  /* HERO SECTION */
+  #hero {
+    padding: 60px 16px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-name {
+    font-size: 42px;
+  }
+
+  .hero-role {
+    font-size: 16px;
+  }
+
+  .hero-tagline {
+    font-size: 14px;
+  }
+
+  .hero-cta {
+    justify-content: center;
+  }
+
+  /* AI HOLOGRAM FIX (IMPORTANT) */
+  .ai-holo {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    margin: 40px auto 0;
+    width: 200px;
+    height: 200px;
+  }
+
+  /* ABOUT SECTION */
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* SKILLS */
+  .skills-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .solar-system {
+    width: 280px;
+    height: 280px;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
 }
 
 /* Glitch effect */
