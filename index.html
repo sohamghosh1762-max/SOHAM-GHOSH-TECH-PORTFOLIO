@@ -1551,7 +1551,7 @@ body.light .sidebar { background: rgba(232,237,248,0.95); }
 body.light .topbar { background: rgba(232,237,248,0.9); }
 body.light .hero-name { filter: drop-shadow(0 0 20px rgba(0,144,224,0.2)); }
 
-/* ===== MOBILE RESPONSIVE FIX ===== */
+/* ===== MOBILE RESPONSIVE COMPLETE FIX ===== */
 @media (max-width: 768px) {
 
   /* Hide custom cursor */
@@ -1559,7 +1559,7 @@ body.light .hero-name { filter: drop-shadow(0 0 20px rgba(0,144,224,0.2)); }
     display: none;
   }
 
-  /* Sidebar → make it bottom nav */
+  /* Sidebar → bottom nav */
   .sidebar {
     width: 100%;
     height: 60px;
@@ -1569,6 +1569,7 @@ body.light .hero-name { filter: drop-shadow(0 0 20px rgba(0,144,224,0.2)); }
     top: auto;
     border-right: none;
     border-top: 1px solid var(--border);
+    z-index: 999;
   }
 
   .sidebar-logo {
@@ -1578,14 +1579,16 @@ body.light .hero-name { filter: drop-shadow(0 0 20px rgba(0,144,224,0.2)); }
   .nav-item {
     width: auto;
     height: auto;
+    font-size: 10px;
   }
 
-  /* Main layout fix */
+  /* Main layout */
   .main-content {
     margin-left: 0;
-    padding-bottom: 70px;
+    padding-bottom: 80px;
   }
 
+  /* Topbar */
   .topbar {
     margin-left: 0;
     padding: 10px 12px;
@@ -1593,20 +1596,23 @@ body.light .hero-name { filter: drop-shadow(0 0 20px rgba(0,144,224,0.2)); }
 
   .topbar-left,
   .topbar-right {
-    margin-left: 0;
     gap: 8px;
     font-size: 10px;
   }
 
-  /* HERO SECTION */
-  #hero {
+  /* Sections */
+  section {
     padding: 60px 16px;
-    align-items: center;
+  }
+
+  /* HERO */
+  #hero {
     text-align: center;
+    align-items: center;
   }
 
   .hero-name {
-    font-size: 42px;
+    font-size: 38px;
   }
 
   .hero-role {
@@ -1618,11 +1624,22 @@ body.light .hero-name { filter: drop-shadow(0 0 20px rgba(0,144,224,0.2)); }
   }
 
   .hero-cta {
-    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
   }
 
-  /* AI HOLOGRAM FIX (IMPORTANT) */
-  .ai-holo {
+  /* Buttons */
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  /* AI HOLOGRAM */
+  .ai-holo,
+  #scene {
     position: relative;
     top: auto;
     right: auto;
@@ -1632,29 +1649,56 @@ body.light .hero-name { filter: drop-shadow(0 0 20px rgba(0,144,224,0.2)); }
     height: 200px;
   }
 
-  /* ABOUT SECTION */
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* SKILLS */
-  .skills-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .solar-system {
-    width: 280px;
-    height: 280px;
-  }
-
-  /* PROJECTS */
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* CONTACT */
+  /* GRID FIXES */
+  .projects-grid,
+  .about-grid,
+  .skills-layout,
   .contact-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 12px;
+  }
+
+  /* PROJECT CARDS */
+  .project-card {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .project-title {
+    font-size: 16px;
+  }
+
+  .project-desc {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .tech-tag {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  /* PUBLICATION CARDS */
+  .pub-card {
+    padding: 16px;
+    margin: 12px;
+  }
+
+  .pub-title {
+    font-size: 15px;
+  }
+
+  .pub-desc {
+    font-size: 13px;
+  }
+
+  /* SKILL MATRIX */
+  .solar-system {
+    width: 260px;
+    height: 260px;
+    margin: auto;
   }
 
 }
