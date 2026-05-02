@@ -521,80 +521,22 @@ section {
   transform: translateY(-2px);
 }
 
-/* ===== IRON MAN HUD REPLACEMENT ===== */
-
-#scene {
+.ironman-img {
   position: absolute;
   top: 50%;
   right: 6%;
   transform: translateY(-50%);
-  width: 300px;
-  height: 360px;
-  pointer-events: none;
+  width: 220px;
+
+  filter: drop-shadow(0 0 25px #00d4ff)
+          drop-shadow(0 0 50px rgba(0,212,255,0.5));
+
+  animation: float 4s ease-in-out infinite;
 }
 
-/* HUD container */
-#hud {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  animation: breathe 5s ease-in-out infinite;
-}
-
-/* breathing effect */
-@keyframes breathe {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-}
-
-/* rotating rings */
-#ring-layer {
-  position: absolute;
-  inset: -40px;
-}
-
-.ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(0,212,255,0.2);
-}
-
-.ring-1 { animation: spin 20s linear infinite; }
-.ring-2 { inset: 10px; animation: spinReverse 15s linear infinite; }
-.ring-3 { inset: 20px; animation: spin 10s linear infinite; }
-.ring-4 { inset: 30px; animation: spinReverse 6s linear infinite; }
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes spinReverse {
-  to { transform: rotate(-360deg); }
-}
-
-/* face container */
-#face-card {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,212,255,0.1), transparent 70%);
-  box-shadow:
-    0 0 40px rgba(0,212,255,0.5),
-    inset 0 0 30px rgba(0,212,255,0.2);
-  backdrop-filter: blur(6px);
-}
-
-/* eyes glow */
-#le, #re {
-  filter: drop-shadow(0 0 20px #00d4ff);
-}
-
-/* particle canvas */
-#particle-canvas {
-  position: absolute;
-  inset: -60px;
-  pointer-events: none;
+@keyframes float {
+  0%,100% { transform: translateY(-50%) translateY(0); }
+  50% { transform: translateY(-50%) translateY(-10px); }
 }
 
 /* ====== ABOUT SECTION ====== */
@@ -1817,34 +1759,8 @@ footer {
   </div>
 
 <div id="scene">
-  <div id="hud">
-
-    <!-- Rings -->
-    <div id="ring-layer">
-      <div class="ring ring-1"></div>
-      <div class="ring ring-2"></div>
-      <div class="ring ring-3"></div>
-      <div class="ring ring-4"></div>
-    </div>
-
-    <!-- Particles -->
-    <canvas id="particle-canvas"></canvas>
-
-    <!-- Face -->
-    <div id="face-card">
-      <svg id="face-svg" viewBox="0 0 560 640">
-
-        <!-- Face Base -->
-        <ellipse cx="280" cy="320" rx="260" ry="308" fill="rgba(0,0,0,0.4)"/>
-
-        <!-- Eyes -->
-        <ellipse id="le" cx="163" cy="175" rx="48" ry="17" fill="#00d4ff"/>
-        <ellipse id="re" cx="397" cy="175" rx="48" ry="17" fill="#00d4ff"/>
-
-      </svg>
-    </div>
-
-  </div>
+  <img src="iron_man_face-removebg-preview.png" class="ironman-img">
+</div>
 </div>
 
   <!-- Holographic floating elements -->
@@ -2341,36 +2257,6 @@ footer {
   <button class="chat-toggle" onclick="toggleChat()">🤖</button>
 </div>
 
-<script>
-const le = document.getElementById('le');
-const re = document.getElementById('re');
-
-document.addEventListener('mousemove', (e) => {
-  const svg = document.getElementById('face-svg');
-  const rect = svg.getBoundingClientRect();
-
-  // Convert mouse position to SVG space
-  const svgX = (e.clientX - rect.left) / rect.width * 560;
-  const svgY = (e.clientY - rect.top) / rect.height * 640;
-
-  function moveEye(eye, baseX, baseY) {
-    const dx = svgX - baseX;
-    const dy = svgY - baseY;
-
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    const maxMove = 12;
-
-    const moveX = (dx / dist) * Math.min(maxMove, dist * 0.05);
-    const moveY = (dy / dist) * Math.min(maxMove, dist * 0.03);
-
-    eye.setAttribute("cx", baseX + moveX);
-    eye.setAttribute("cy", baseY + moveY);
-  }
-
-  moveEye(le, 163, 175);
-  moveEye(re, 397, 175);
-});
-</script>
 
 <script>
 // ====== CURSOR ======
@@ -2705,5 +2591,22 @@ const style=document.createElement('style');
 style.textContent='@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}';
 document.head.appendChild(style);
 </script>
+
+<script>
+const ironman = document.querySelector('.ironman-img');
+
+document.addEventListener('mousemove', (e) => {
+
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+
+  const moveX = (e.clientX - screenWidth / 2) / 40;
+  const moveY = (e.clientY - screenHeight / 2) / 40;
+
+  ironman.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+
+});
+</script>
+
 </body>
 </html>
