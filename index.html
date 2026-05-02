@@ -521,123 +521,80 @@ section {
   transform: translateY(-2px);
 }
 
-/* ===== ULTRA AI HOLOGRAM ===== */
+/* ===== IRON MAN HUD REPLACEMENT ===== */
 
-.ai-holo {
+#scene {
   position: absolute;
   top: 50%;
   right: 6%;
   transform: translateY(-50%);
-  width: 260px;
-  height: 260px;
+  width: 300px;
+  height: 360px;
   pointer-events: none;
 }
 
-/* CORE ENERGY */
-.core {
+/* HUD container */
+#hud {
+  position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,212,255,0.25), transparent 70%);
-  box-shadow:
-    0 0 80px rgba(0,212,255,0.6),
-    inset 0 0 40px rgba(0,212,255,0.3);
-  position: absolute;
-  animation: pulseCore 4s ease-in-out infinite;
+  animation: breathe 5s ease-in-out infinite;
 }
 
-/* ROTATING RINGS */
+/* breathing effect */
+@keyframes breathe {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* rotating rings */
+#ring-layer {
+  position: absolute;
+  inset: -40px;
+}
+
 .ring {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   border-radius: 50%;
-  border: 1px solid rgba(0,212,255,0.3);
+  border: 1px solid rgba(0,212,255,0.2);
 }
 
-.r1 { animation: spin 8s linear infinite; }
-.r2 { transform: scale(0.8); animation: spinReverse 10s linear infinite; }
-.r3 { transform: scale(0.6); animation: spin 12s linear infinite; }
+.ring-1 { animation: spin 20s linear infinite; }
+.ring-2 { inset: 10px; animation: spinReverse 15s linear infinite; }
+.ring-3 { inset: 20px; animation: spin 10s linear infinite; }
+.ring-4 { inset: 30px; animation: spinReverse 6s linear infinite; }
 
-/* EYES */
-.eyes {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.eye {
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(0,212,255,0.15);
-  border: 1px solid var(--blue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.eye.left { top: 40%; left: 25%; }
-.eye.right { top: 40%; right: 25%; }
-
-/* PUPIL */
-.pupil {
-  width: 14px;
-  height: 14px;
-  background: var(--neon);
-  border-radius: 50%;
-  box-shadow: 0 0 12px var(--neon);
-  transition: transform 0.1s linear;
-}
-
-/* SCANLINE */
-.scan {
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: rgba(0,255,255,0.4);
-  animation: scanMove 3s linear infinite;
-}
-
-/* PARTICLES */
-.ai-holo::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(0,212,255,0.2) 2px, transparent 2px);
-  background-size: 30px 30px;
-  opacity: 0.3;
-  animation: drift 20s linear infinite;
-}
-
-/* ANIMATIONS */
 @keyframes spin {
-  from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
 @keyframes spinReverse {
-  from { transform: rotate(360deg); }
-  to { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
 }
 
-@keyframes pulseCore {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+/* face container */
+#face-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,0.1), transparent 70%);
+  box-shadow:
+    0 0 40px rgba(0,212,255,0.5),
+    inset 0 0 30px rgba(0,212,255,0.2);
+  backdrop-filter: blur(6px);
 }
 
-@keyframes scanMove {
-  0% { top: 0; opacity: 0.2; }
-  50% { opacity: 1; }
-  100% { top: 100%; opacity: 0.2; }
+/* eyes glow */
+#le, #re {
+  filter: drop-shadow(0 0 20px #00d4ff);
 }
 
-@keyframes drift {
-  from { transform: translateY(0); }
-  to { transform: translateY(-40px); }
+/* particle canvas */
+#particle-canvas {
+  position: absolute;
+  inset: -60px;
+  pointer-events: none;
 }
 
 /* ====== ABOUT SECTION ====== */
@@ -1859,19 +1816,35 @@ footer {
     <a href="resume.pdf" download class="btn-secondary">⬇ DOWNLOAD RESUME</a>
   </div>
 
-<div class="ai-holo">
-  <div class="core"></div>
+<div id="scene">
+  <div id="hud">
 
-  <div class="ring r1"></div>
-  <div class="ring r2"></div>
-  <div class="ring r3"></div>
+    <!-- Rings -->
+    <div id="ring-layer">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="ring ring-4"></div>
+    </div>
 
-  <div class="eyes">
-    <div class="eye left"><div class="pupil"></div></div>
-    <div class="eye right"><div class="pupil"></div></div>
+    <!-- Particles -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Face -->
+    <div id="face-card">
+      <svg id="face-svg" viewBox="0 0 560 640">
+
+        <!-- Face Base -->
+        <ellipse cx="280" cy="320" rx="260" ry="308" fill="rgba(0,0,0,0.4)"/>
+
+        <!-- Eyes -->
+        <ellipse id="le" cx="163" cy="175" rx="48" ry="17" fill="#00d4ff"/>
+        <ellipse id="re" cx="397" cy="175" rx="48" ry="17" fill="#00d4ff"/>
+
+      </svg>
+    </div>
+
   </div>
-
-  <div class="scan"></div>
 </div>
 
   <!-- Holographic floating elements -->
@@ -2369,22 +2342,33 @@ footer {
 </div>
 
 <script>
-const pupils = document.querySelectorAll('.pupil');
+const le = document.getElementById('le');
+const re = document.getElementById('re');
 
 document.addEventListener('mousemove', (e) => {
-  pupils.forEach(pupil => {
-    const rect = pupil.parentElement.getBoundingClientRect();
+  const svg = document.getElementById('face-svg');
+  const rect = svg.getBoundingClientRect();
 
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
+  // Convert mouse position to SVG space
+  const svgX = (e.clientX - rect.left) / rect.width * 560;
+  const svgY = (e.clientY - rect.top) / rect.height * 640;
 
-    const angle = Math.atan2(e.clientY - y, e.clientX - x);
+  function moveEye(eye, baseX, baseY) {
+    const dx = svgX - baseX;
+    const dy = svgY - baseY;
 
-    const moveX = Math.cos(angle) * 8;
-    const moveY = Math.sin(angle) * 8;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const maxMove = 12;
 
-    pupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
-  });
+    const moveX = (dx / dist) * Math.min(maxMove, dist * 0.05);
+    const moveY = (dy / dist) * Math.min(maxMove, dist * 0.03);
+
+    eye.setAttribute("cx", baseX + moveX);
+    eye.setAttribute("cy", baseY + moveY);
+  }
+
+  moveEye(le, 163, 175);
+  moveEye(re, 397, 175);
 });
 </script>
 
