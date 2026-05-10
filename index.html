@@ -1139,6 +1139,10 @@ section {
 
   padding: 32px;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   background: rgba(5,13,26,0.78);
 
   border: 1px solid rgba(0,212,255,0.18);
@@ -1147,8 +1151,6 @@ section {
   backdrop-filter: blur(12px);
 
   transition: all 0.4s ease;
-
-  max-width: 1400px;
 
   overflow: hidden;
 
@@ -1192,7 +1194,7 @@ section {
   letter-spacing: 1px;
 }
 .timeline-title {
-  max-width: 80%;
+  max-width: 65%;
 }
 .timeline-role {
   font-family: var(--font-mono);
@@ -1216,7 +1218,7 @@ section {
   overflow: hidden;
 }
 .timeline-body {
-  max-width: 92%;
+  max-width: 78%;
 
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -1227,10 +1229,7 @@ section {
 
   color: rgba(255,255,255,0.58);
 }
-.timeline-item {
-  overflow: hidden;
-  max-width: 100%;
-}
+
 .timeline-link {
   display: flex;
   flex-wrap: wrap;
@@ -2323,7 +2322,7 @@ footer {
       <a href="ICCRET2025_Proceeding.pdf"target="_blank"class="pub-btn secondary">📄 VIEW PROCEEDING</a>
 </div>
 </div>
-    </div>
+   
 
     <div class="timeline-item">
       <div class="timeline-dot" style="background:var(--purple2);box-shadow:0 0 12px var(--purple2)"></div>
