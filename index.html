@@ -2847,5 +2847,92 @@ document.addEventListener('mousemove', (e) => {
 });
 </script>
 
+<!-- ===== MOBILE ENHANCEMENT PATCH (appended — zero existing lines changed) ===== -->
+<style>
+@media (max-width: 768px) {
+  .solar-system { width: 280px !important; height: 280px !important; overflow: hidden; }
+  .orbit1 { width: 100px !important; height: 100px !important; }
+  .orbit2 { width: 130px !important; height: 130px !important; }
+  .orbit3 { width: 160px !important; height: 160px !important; }
+  .orbit4 { width: 190px !important; height: 190px !important; }
+  .orbit5 { width: 220px !important; height: 220px !important; }
+  .orbit6 { width: 250px !important; height: 250px !important; }
+  .planet { font-size: 10px !important; padding: 4px 10px !important; }
+  .sun { width: 56px !important; height: 56px !important; font-size: 11px !important; }
+  section { padding: 60px 18px 60px 18px !important; }
+  #hero { padding: 60px 18px 80px !important; min-height: 100svh; }
+  .hero-badge { justify-content: center; font-size: 9px; letter-spacing: 2px; }
+  .hero-metrics { justify-content: center; gap: 12px; }
+  .metric-card { padding: 12px 16px; flex: 1 1 calc(50% - 12px); min-width: 120px; }
+  .metric-value { font-size: 22px !important; }
+  .about-grid { grid-template-columns: 1fr !important; }
+  .profile-card { margin-bottom: 8px; }
+  .counter-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 10px; }
+  .counter-value { font-size: 22px !important; }
+  .about-bio { font-size: 15px !important; }
+  .skills-layout { grid-template-columns: 1fr !important; }
+  .timeline { padding-left: 28px; }
+  .timeline-title { max-width: 100% !important; font-size: 15px !important; }
+  .timeline-body { max-width: 100% !important; font-size: 13px !important; }
+  .timeline-item { padding: 20px 16px !important; border-radius: 12px !important; }
+  .timeline-dot { left: -24px !important; }
+  .timeline-link { flex-wrap: wrap; gap: 8px; }
+  .pub-btn { padding: 8px 14px !important; font-size: 11px !important; }
+  .projects-grid { grid-template-columns: 1fr !important; padding: 0 !important; }
+  .project-filters { justify-content: center; }
+  .pub-grid { grid-template-columns: 1fr !important; }
+  .contact-grid { grid-template-columns: 1fr !important; }
+  .topbar { padding: 8px 12px !important; }
+  .topbar-left { font-size: 9px !important; gap: 8px !important; margin-left: 0 !important; }
+  .topbar-right { margin-left: 0 !important; }
+  .theme-toggle { display: none; }
+  .download-btn { font-size: 10px !important; padding: 6px 12px !important; }
+  .chat-window { width: calc(100vw - 48px) !important; right: 0 !important; }
+  footer { font-size: 9px !important; padding: 16px !important; }
+  .ironman-img { width: 140px !important; top: auto !important; bottom: 90px !important; right: 4% !important; transform: none !important; position: absolute; opacity: 0.5; }
+  .main-content { padding-bottom: 80px !important; }
+  body { overflow-x: hidden !important; }
+  .section-header { text-align: center; }
+  .section-tag { justify-content: center !important; }
+  .section-title { text-align: center !important; }
+  .nav-item { min-width: 44px; min-height: 44px; }
+  .quick-btn { min-height: 36px; padding: 6px 14px !important; }
+  .chat-send { width: 40px !important; height: 40px !important; }
+  .project-link { padding: 8px 16px !important; min-height: 40px; }
+  .contact-info-item { min-height: 56px; }
+  .filter-btn { min-height: 36px; }
+}
+@media (max-width: 400px) {
+  .ironman-img { display: none !important; }
+  .hero-name { font-size: 32px !important; }
+  .solar-system { width: 240px !important; height: 240px !important; overflow: hidden; }
+  .orbit5 { width: 200px !important; height: 200px !important; }
+  .orbit6 { width: 230px !important; height: 230px !important; }
+  .metric-card { flex: 1 1 100% !important; }
+  .counter-grid { grid-template-columns: 1fr 1fr !important; }
+}
+</style>
+<script>
+(function(){
+  if('ontouchstart' in window){
+    var im = document.querySelector('.ironman-img');
+    if(im){ im.style.transform=''; }
+  }
+  var sections = document.querySelectorAll('section[id]');
+  var navItems = document.querySelectorAll('.nav-item');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        navItems.forEach(function(n){ n.classList.remove('active'); });
+        var match = document.querySelector('.nav-item[href="#'+e.target.id+'"]');
+        if(match) match.classList.add('active');
+      }
+    });
+  },{threshold:0.4});
+  sections.forEach(function(s){ obs.observe(s); });
+})();
+</script>
+<!-- ===== END MOBILE PATCH ===== -->
+
 </body>
 </html>
