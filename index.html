@@ -1841,6 +1841,11 @@ footer {
     <span class="nav-label">RSRCH</span>
     <span class="nav-tooltip">Research.Log</span>
   </a>
+  <a class="nav-item" href="#hackathons" onclick="setActive(this)">
+  <span class="nav-icon">🏆</span>
+  <span class="nav-label">HACK</span>
+  <span class="nav-tooltip">Hackathon.Archive</span>
+  </a>
   <a class="nav-item" href="#contact" onclick="setActive(this)">
     <span class="nav-icon">◎</span>
     <span class="nav-label">CNTCT</span>
@@ -2455,6 +2460,79 @@ footer {
 
 </section>
 
+<!-- ====== HACKATHON ACHIEVEMENTS ====== -->
+<section id="hackathons" style="background: linear-gradient(180deg, transparent 0%, rgba(5,13,26,0.4) 100%);">
+  <div class="section-header">
+    <div class="section-tag">HACKATHON HALL OF FAME</div>
+    <h2 class="section-title">Hackathon.Archive</h2>
+  </div>
+
+  <!-- Stats Bar -->
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:48px;">
+    <div class="metric-card">
+      <div class="metric-value" style="font-size:22px">🏆 1</div>
+      <div class="metric-label">Wins</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value" style="font-size:22px">⚡ 2+</div>
+      <div class="metric-label">Hackathons</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value" style="font-size:22px">🌏 National</div>
+      <div class="metric-label">Level</div>
+    </div>
+  </div>
+
+  <!-- Cards Grid -->
+  <div class="projects-grid">
+
+    <!-- Card 1: Winner -->
+    <div class="project-card" style="border-color:rgba(240,180,41,0.4);box-shadow:0 0 30px rgba(240,180,41,0.08);">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue));"></div>
+      <div class="project-header">
+        <span class="project-icon">🏆</span>
+        <span style="font-family:var(--font-mono);font-size:10px;color:var(--gold);letter-spacing:2px;background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.35);border-radius:20px;padding:3px 12px;">🥇</span>
+      </div>
+      <div class="project-body">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--neon);letter-spacing:3px;margin-bottom:6px;">HACKSPHERE 2026</div>
+        <div class="project-title">2nd Runner-Up</div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--blue);margin-bottom:10px;display:flex;align-items:center;gap:6px;">
+          📍 <span>Techno International NewTown, Kolkata, West Bengal</span>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--gold);margin-bottom:12px;">
+        👥 Team: <span style="color:var(--text);">aNioNs</span>
+        </div>
+        <div class="project-desc">CodeIntel AI is an AI-powered competitive coding and interview preparation platform designed to help students improve their problem-solving skills through personalized learning, real-time coding challenges, AI-driven hints, reasoning validation, coding battles, contests, leaderboards, and performance analytics. The platform provides a professional coding environment with intelligent mentorship, adaptive learning paths, anti-cheat monitoring, and multiplayer coding competitions to prepare users for technical interviews and competitive programming.</div>
+
+        <!-- Trophy photo placeholder -->
+       <div style="background:rgba(0,212,255,0.04);border:1px dashed rgba(0,212,255,0.2);border-radius:10px;padding:10px;text-align:center;margin-bottom:14px;">
+       <img
+    src="sohamghosh-hackatron-image.jpg"
+    alt="Soham Ghosh Trophy Moment"
+    style="width:100%;border-radius:8px;"
+  >
+</div>
+
+        <div class="project-stack">
+          <span class="stack-tag">React + Vite</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">Express.js</span>
+          <span class="stack-tag">MongoDB</span>
+          <span class="stack-tag">AI Services</span>
+          <span class="stack-tag">Monaco Editor</span>
+          <span class="stack-tag">Recharts</span>
+          <span class="stack-tag">Tailwind CSS</span>
+        </div>
+        <div class="project-links">
+          <a class="project-link" href="https://www.image2url.com/r2/default/images/1780810302753-a2f0acaa-b007-4119-a55f-a504561a3f16.jpeg">🏅 Certificate</a>
+          <a class="project-link" href="#">⬡ Project</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /projects-grid -->
+</section>
+
 <!-- ====== CONTACT ====== -->
 <section id="contact">
   <div class="section-header">
@@ -2989,5 +3067,133 @@ document.addEventListener('mousemove', (e) => {
 </script>
 <!-- ===== END MOBILE PATCH ===== -->
 
+<!-- ===== UNIQUE UPGRADE: COMET TRAIL + COMMAND PALETTE + PROGRESS BAR ===== -->
+<style>
+#progress-bar{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,#f0b429,#00d4ff);z-index:99999;transition:width .1s linear;pointer-events:none}
+#cmd-overlay{position:fixed;inset:0;background:rgba(2,4,8,.72);z-index:99990;display:none;align-items:flex-start;justify-content:center;padding-top:18vh;backdrop-filter:blur(6px)}
+#cmd-overlay.open{display:flex}
+#cmd-box{width:min(540px,90vw);background:#080f1e;border:1px solid rgba(0,212,255,.35);border-radius:14px;overflow:hidden;box-shadow:0 0 60px rgba(0,212,255,.18)}
+#cmd-input{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(0,212,255,.15);padding:18px 22px;font-family:'JetBrains Mono',monospace;font-size:15px;color:#e2e8f0;outline:none;letter-spacing:1px}
+#cmd-input::placeholder{color:rgba(148,163,184,.5)}
+.cmd-item{padding:14px 22px;font-family:'Rajdhani',sans-serif;font-size:15px;color:rgba(148,163,184,.85);display:flex;align-items:center;gap:14px;cursor:pointer;transition:background .15s}
+.cmd-item:hover,.cmd-item.active{background:rgba(0,212,255,.08);color:#00d4ff}
+.cmd-item-icon{font-size:18px;width:24px;text-align:center}
+.cmd-item-label{flex:1}
+.cmd-item-kbd{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(148,163,184,.4);letter-spacing:1px}
+#cmd-footer{padding:10px 22px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(148,163,184,.35);letter-spacing:2px;border-top:1px solid rgba(0,212,255,.08)}
+#trail-canvas{position:fixed;inset:0;pointer-events:none;z-index:99996}
+</style>
+
+<div id="progress-bar"></div>
+<canvas id="trail-canvas"></canvas>
+<div id="cmd-overlay">
+  <div id="cmd-box">
+    <input id="cmd-input" placeholder="/ Type a section name..." autocomplete="off" spellcheck="false">
+    <div id="cmd-list"></div>
+    <div id="cmd-footer">↑↓ navigate &nbsp;·&nbsp; enter to jump &nbsp;·&nbsp; esc to close</div>
+  </div>
+</div>
+
+<script>
+(function(){
+var sections=[
+  {icon:'⌂',label:'Hero — Home',id:'hero'},
+  {icon:'◉',label:'About Me',id:'about'},
+  {icon:'◈',label:'Skills Matrix',id:'skills'},
+  {icon:'⚙',label:'Experience',id:'experience'},
+  {icon:'◫',label:'Projects',id:'projects'},
+  {icon:'◭',label:'Publications',id:'publications'},
+  {icon:'◍',label:'Research',id:'research'},
+  {icon:'🏆',label:'Hackathons',id:'hackathons'},
+  {icon:'◎',label:'Contact',id:'contact'},
+];
+var overlay=document.getElementById('cmd-overlay');
+var input=document.getElementById('cmd-input');
+var list=document.getElementById('cmd-list');
+var active=0;
+
+function render(q){
+  var filtered=sections.filter(function(s){return !q||s.label.toLowerCase().includes(q.toLowerCase());});
+  list.innerHTML='';
+  filtered.forEach(function(s,i){
+    var d=document.createElement('div');
+    d.className='cmd-item'+(i===0?' active':'');
+    d.innerHTML='<span class="cmd-item-icon">'+s.icon+'</span><span class="cmd-item-label">'+s.label+'</span><span class="cmd-item-kbd">JUMP →</span>';
+    d.onclick=function(){jump(s.id);};
+    list.appendChild(d);
+  });
+  active=0;
+}
+
+function jump(id){
+  overlay.classList.remove('open');
+  var el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='/' && document.activeElement.tagName!=='INPUT' && document.activeElement.tagName!=='TEXTAREA'){
+    e.preventDefault();
+    overlay.classList.add('open');
+    input.value='';
+    render('');
+    setTimeout(function(){input.focus();},50);
+  }
+  if(e.key==='Escape') overlay.classList.remove('open');
+  if(overlay.classList.contains('open')){
+    var items=list.querySelectorAll('.cmd-item');
+    if(e.key==='ArrowDown'){
+      active=Math.min(active+1,items.length-1);
+      items.forEach(function(it,i){it.classList.toggle('active',i===active);});
+    }
+    if(e.key==='ArrowUp'){
+      active=Math.max(active-1,0);
+      items.forEach(function(it,i){it.classList.toggle('active',i===active);});
+    }
+    if(e.key==='Enter' && items[active]){
+      var label=sections.find(function(s){return s.label===items[active].querySelector('.cmd-item-label').textContent;});
+      if(label) jump(label.id);
+    }
+  }
+});
+input.addEventListener('input',function(){render(input.value.replace('/',''));active=0;});
+overlay.addEventListener('click',function(e){if(e.target===overlay) overlay.classList.remove('open');});
+
+window.addEventListener('scroll',function(){
+  var doc=document.documentElement;
+  var pct=(doc.scrollTop/(doc.scrollHeight-doc.clientHeight))*100;
+  document.getElementById('progress-bar').style.width=pct+'%';
+});
+
+var tc=document.getElementById('trail-canvas');
+tc.width=window.innerWidth; tc.height=window.innerHeight;
+window.addEventListener('resize',function(){tc.width=window.innerWidth;tc.height=window.innerHeight;});
+var tctx=tc.getContext('2d');
+var particles=[];
+document.addEventListener('mousemove',function(e){
+  for(var i=0;i<3;i++){
+    particles.push({x:e.clientX,y:e.clientY,r:Math.random()*4+2,alpha:1,vx:(Math.random()-.5)*1.2,vy:(Math.random()-.5)*1.2,hue:Math.random()<.5?40:185});
+  }
+});
+function animTrail(){
+  tctx.clearRect(0,0,tc.width,tc.height);
+  particles=particles.filter(function(p){return p.alpha>0.02;});
+  particles.forEach(function(p){
+    tctx.beginPath();
+    tctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    tctx.fillStyle=p.hue===40?'rgba(240,180,41,'+p.alpha+')':'rgba(0,212,255,'+p.alpha+')';
+    tctx.fill();
+    p.alpha-=0.045;
+    p.r*=0.93;
+    p.x+=p.vx;
+    p.y+=p.vy;
+  });
+  requestAnimationFrame(animTrail);
+}
+animTrail();
+})();
+</script>
+<!-- ===== END UPGRADE ===== -->
+ 
 </body>
 </html>
