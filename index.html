@@ -70,66 +70,196 @@ body {
   z-index: 99997;
 }
 
-/* Boot screen */
+/* ══════════════════════════════════════════
+   BOOT SCREEN — UPGRADED
+   (only this block changed from original)
+══════════════════════════════════════════ */
 #boot-screen {
   position: fixed;
   inset: 0;
   background: var(--black);
   z-index: 9999;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
 }
-.boot-logo {
+#boot-wrap {
+  width: min(580px, 92vw);
+  background: rgba(5,10,20,0.92);
+  border: 1px solid rgba(0,212,255,0.18);
+  border-radius: 14px;
+  padding: 36px 32px 28px;
+  position: relative;
+  overflow: hidden;
+}
+#boot-nc {
+  position: absolute;
+  inset: 0;
+  opacity: 0.13;
+  pointer-events: none;
+  border-radius: 14px;
+}
+.boot-inner { position: relative; z-index: 2; }
+.boot-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.bdot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  animation: bdotPulse 1.5s infinite;
+}
+.bdot:nth-child(1){background:#f0b429;}
+.bdot:nth-child(2){background:#00d4ff;animation-delay:.2s;}
+.bdot:nth-child(3){background:#a855f7;animation-delay:.4s;}
+@keyframes bdotPulse{0%,100%{opacity:1}50%{opacity:0.25}}
+.boot-sys-label {
+  margin-left: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(148,163,184,0.5);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.boot-logo-line {
   font-family: var(--font-display);
-  font-size: clamp(24px, 5vw, 52px);
+  font-size: clamp(20px, 4vw, 32px);
   font-weight: 900;
   background: linear-gradient(135deg, var(--gold) 0%, var(--blue) 50%, var(--purple2) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 48px;
   letter-spacing: 4px;
+  margin-bottom: 22px;
   text-shadow: none;
-  animation: bootPulse 2s infinite;
 }
-@keyframes bootPulse {
-  0%,100%{filter:brightness(1)} 50%{filter:brightness(1.3)}
+.boot-master-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
 }
-.boot-log {
-  width: min(600px, 90vw);
-  background: rgba(0,20,40,0.8);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 24px;
-}
-.boot-line {
-  font-size: 13px;
-  color: var(--neon);
-  margin: 6px 0;
-  opacity: 0;
-  animation: fadeIn 0.5s forwards;
-}
-.boot-line.done { color: var(--blue); }
-.boot-line::before { content: '> '; color: var(--gold); }
-@keyframes fadeIn { to { opacity: 1; } }
-.boot-progress {
-  width: 100%;
+.boot-master-track {
+  flex: 1;
   height: 2px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 2px;
-  margin-top: 20px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 1px;
   overflow: hidden;
 }
-.boot-progress-bar {
+.boot-master-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--blue), var(--gold));
   width: 0%;
-  transition: width 0.3s ease;
-  box-shadow: 0 0 10px var(--blue);
+  background: linear-gradient(90deg, var(--gold), var(--blue));
+  border-radius: 1px;
+  transition: width 0.45s cubic-bezier(0.16,1,0.3,1);
 }
+.boot-pct {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(148,163,184,0.45);
+  min-width: 30px;
+  text-align: right;
+}
+.boot-mod-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-bottom: 22px;
+}
+.boot-mod {
+  border: 0.5px solid rgba(0,212,255,0.1);
+  border-radius: 7px;
+  padding: 10px 12px;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.35s, transform 0.35s, border-color 0.35s;
+}
+.boot-mod.bm-active {
+  opacity: 1;
+  transform: translateY(0);
+  border-color: rgba(0,212,255,0.45);
+  background: rgba(0,212,255,0.04);
+}
+.boot-mod.bm-done {
+  opacity: 1;
+  transform: translateY(0);
+  border-color: rgba(0,212,255,0.15);
+}
+.bm-name {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(148,163,184,0.7);
+  letter-spacing: 0.12em;
+  margin-bottom: 7px;
+  text-transform: uppercase;
+}
+.bm-track {
+  height: 2px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 1px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.bm-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 1px;
+  transition: width 0.65s cubic-bezier(0.16,1,0.3,1);
+}
+.bm-status {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(0,212,255,0.3);
+  transition: color 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.boot-mod.bm-active .bm-status { color: rgba(0,212,255,0.75); }
+.boot-mod.bm-done .bm-status   { color: rgba(0,255,204,0.5); }
+.boot-log-area {
+  border-top: 0.5px solid rgba(0,212,255,0.1);
+  padding-top: 14px;
+}
+.boot-log-line {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.75;
+  color: rgba(0,212,255,0.25);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.28s ease, color 0.4s;
+}
+.boot-log-line.bll-show { max-height: 22px; }
+.boot-log-line .bll-pfx { margin-right: 7px; }
+.boot-log-line.bll-ok   { color: rgba(0,255,204,0.55); }
+.boot-log-line.bll-warn { color: rgba(240,180,41,0.55); }
+.boot-final {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  opacity: 0;
+  transition: opacity 0.7s;
+  text-shadow: 0 0 20px rgba(240,180,41,0.4);
+}
+.boot-final.bf-show { opacity: 1; }
+.boot-cursor {
+  display: inline-block;
+  width: 8px; height: 14px;
+  background: var(--gold);
+  border-radius: 1px;
+  animation: bcBlink 1s step-end infinite;
+  flex-shrink: 0;
+}
+@keyframes bcBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+/* ══ END BOOT SCREEN STYLES ══ */
 
 /* Canvas background */
 #bg-canvas {
@@ -1791,10 +1921,30 @@ footer {
 <div id="cursor-ring"></div>
 <div class="scanlines"></div>
 
-<!-- Boot Screen -->
+<!-- Boot Screen — upgraded (HTML changed, nothing else) -->
 <div id="boot-screen">
-  <div class="boot-logo">SG.AI SYSTEM</div>
-  <div class="boot-log" id="boot-log"></div>
+  <div id="boot-wrap">
+    <canvas id="boot-nc"></canvas>
+    <div class="boot-inner">
+      <div class="boot-header">
+        <div class="bdot"></div>
+        <div class="bdot"></div>
+        <div class="bdot"></div>
+        <span class="boot-sys-label">Neural System Init</span>
+      </div>
+      <div class="boot-logo-line">SG.AI SYSTEM</div>
+      <div class="boot-master-row">
+        <div class="boot-master-track"><div class="boot-master-fill" id="bm-prog"></div></div>
+        <span class="boot-pct" id="bm-pct">0%</span>
+      </div>
+      <div class="boot-mod-grid" id="bm-grid"></div>
+      <div class="boot-log-area" id="bm-log"></div>
+      <div class="boot-final" id="bm-final">
+        <span class="boot-cursor"></span>
+        <span id="bm-final-text"></span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Canvas Background -->
@@ -2169,14 +2319,11 @@ footer {
         <div class="project-title">AI-Based Medical Chatbot for Symptom Checking</div>
         <div class="project-desc">Developed an AI-assisted health support system with symptom triage, emergency detection, chatbot guidance, and doctor appointment booking.</div>
         <div class="project-stack">
-          <!-- TECH STACK -->
         <span class="stack-tag">HTML</span>
         <span class="stack-tag">CSS</span>
         <span class="stack-tag">JavaScript</span>
         <span class="stack-tag">Rule-Based AI</span>
         <span class="stack-tag">Local Storage</span>
-
-          <!-- FEATURES -->
 <span class="stack-tag">Symptom Triage Wizard</span>
 <span class="stack-tag">AI Chatbot Interface</span>
 <span class="stack-tag">Doctor Booking System</span>
@@ -2504,7 +2651,6 @@ footer {
         </div>
         <div class="project-desc">CodeIntel AI is an AI-powered competitive coding and interview preparation platform designed to help students improve their problem-solving skills through personalized learning, real-time coding challenges, AI-driven hints, reasoning validation, coding battles, contests, leaderboards, and performance analytics. The platform provides a professional coding environment with intelligent mentorship, adaptive learning paths, anti-cheat monitoring, and multiplayer coding competitions to prepare users for technical interviews and competitive programming.</div>
 
-        <!-- Trophy photo placeholder -->
        <div style="background:rgba(0,212,255,0.04);border:1px dashed rgba(0,212,255,0.2);border-radius:10px;padding:10px;text-align:center;margin-bottom:14px;">
        <img
     src="sohamghosh-hackatron-image.jpg"
@@ -2660,46 +2806,152 @@ function updateTime() {
 }
 setInterval(updateTime, 1000); updateTime();
 
-// ====== BOOT SEQUENCE ======
-const bootLines = [
-  {text:'Initializing Soham Ghosh AI System...', delay:400},
-  {text:'Loading core modules: Python · PyTorch · TensorFlow', delay:900},
-  {text:'Loading Projects... [9 AI/ML deployments detected]', delay:1400},
-  {text:'Loading Research Modules... [NLP · CV · Deep Learning]', delay:1900},
-  {text:'Syncing Skills Matrix... [8 primary capabilities]', delay:2400},
-  {text:'Loading Publications... [3 technical books indexed]', delay:2900},
-  {text:'Neural Core Activated. System ready.', delay:3400},
-];
-const bootLog = document.getElementById('boot-log');
-const bootBar = document.createElement('div');
-bootBar.className = 'boot-progress';
-bootBar.innerHTML = '<div class="boot-progress-bar" id="boot-bar"></div>';
-bootLog.appendChild(bootBar);
+// ====== BOOT SEQUENCE — UPGRADED ======
+(function(){
+  const MODS = [
+    {name:'PYTHON · PYTORCH',   color:'#00d4ff', label:'Deep learning cores'},
+    {name:'TENSORFLOW',         color:'#f0b429', label:'Model pipeline ready'},
+    {name:'NLP PIPELINE',       color:'#a855f7', label:'Language stack loaded'},
+    {name:'COMPUTER VISION',    color:'#00ffcc', label:'9 deployments mapped'},
+    {name:'SKILLS MATRIX',      color:'#0090e0', label:'8 capabilities synced'},
+    {name:'PUBLICATIONS',       color:'#f0b429', label:'3 books indexed'},
+  ];
+  const LOGS = [
+    {t:'\u2192 kernel bootstrap complete',              cls:''},
+    {t:'\u2713 cuda device 0 detected [RTX-class]',   cls:'bll-ok'},
+    {t:'\u2192 loading model weights... 847 MB',       cls:''},
+    {t:'\u2713 gradient tape initialized',             cls:'bll-ok'},
+    {t:'\u2192 tokenizer vocab [50k entries] attached',cls:''},
+    {t:'\u26A0 warm-up pass: 14ms latency noted',     cls:'bll-warn'},
+    {t:'\u2713 inference graph compiled',              cls:'bll-ok'},
+    {t:'\u2713 all modules checksum passed',           cls:'bll-ok'},
+  ];
 
-bootLines.forEach((line, i) => {
-  setTimeout(()=>{
-    const el = document.createElement('div');
-    el.className = 'boot-line' + (i===bootLines.length-1?' done':'');
-    el.textContent = line.text;
-    el.style.animationDelay = '0s';
-    bootLog.insertBefore(el, bootBar);
-    document.getElementById('boot-bar').style.width = ((i+1)/bootLines.length*100)+'%';
-  }, line.delay);
-});
+  /* Neural canvas inside boot card */
+  const nc = document.getElementById('boot-nc');
+  const bw = document.getElementById('boot-wrap');
+  const nctx = nc.getContext('2d');
+  function resizeNC(){ nc.width=bw.offsetWidth; nc.height=bw.offsetHeight; }
+  resizeNC();
+  const nnodes = Array.from({length:28},()=>({
+    x:Math.random()*nc.width, y:Math.random()*nc.height,
+    vx:(Math.random()-.5)*.28, vy:(Math.random()-.5)*.28
+  }));
+  function drawNC(){
+    nctx.clearRect(0,0,nc.width,nc.height);
+    nnodes.forEach(n=>{
+      n.x+=n.vx; n.y+=n.vy;
+      if(n.x<0||n.x>nc.width) n.vx*=-1;
+      if(n.y<0||n.y>nc.height) n.vy*=-1;
+    });
+    for(let i=0;i<nnodes.length;i++){
+      for(let j=i+1;j<nnodes.length;j++){
+        const dx=nnodes[i].x-nnodes[j].x, dy=nnodes[i].y-nnodes[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<100){
+          nctx.beginPath();
+          nctx.strokeStyle='rgba(0,212,255,'+(1-d/100)*.4+')';
+          nctx.lineWidth=.5;
+          nctx.moveTo(nnodes[i].x,nnodes[i].y);
+          nctx.lineTo(nnodes[j].x,nnodes[j].y);
+          nctx.stroke();
+        }
+      }
+    }
+    nnodes.forEach(n=>{
+      nctx.beginPath();
+      nctx.arc(n.x,n.y,1.4,0,Math.PI*2);
+      nctx.fillStyle='rgba(168,85,247,0.6)';
+      nctx.fill();
+    });
+    requestAnimationFrame(drawNC);
+  }
+  drawNC();
 
-setTimeout(()=>{
-  document.getElementById('boot-screen').style.opacity='0';
-  document.getElementById('boot-screen').style.transition='opacity 1s';
-  document.getElementById('bg-canvas').style.opacity='1';
-  document.getElementById('main-wrapper').style.opacity='1';
+  /* Build module cards */
+  const grid = document.getElementById('bm-grid');
+  MODS.forEach((m,i)=>{
+    const d=document.createElement('div');
+    d.className='boot-mod'; d.id='bmod'+i;
+    d.innerHTML='<div class="bm-name">'+m.name+'</div><div class="bm-track"><div class="bm-fill" id="bmf'+i+'" style="background:'+m.color+'"></div></div><div class="bm-status" id="bms'+i+'">'+m.label+'</div>';
+    grid.appendChild(d);
+  });
+
+  const total = MODS.length + LOGS.length + 1;
+  let done = 0;
+  function adv(){
+    done++;
+    const p=Math.round(done/total*100);
+    document.getElementById('bm-prog').style.width=p+'%';
+    document.getElementById('bm-pct').textContent=p+'%';
+  }
+
+  /* Animate modules */
+  MODS.forEach((m,i)=>{
+    setTimeout(()=>{
+      const card=document.getElementById('bmod'+i);
+      const fill=document.getElementById('bmf'+i);
+      card.classList.add('bm-active');
+      let pct=0;
+      const iv=setInterval(()=>{
+        pct=Math.min(100,pct+Math.random()*16+7);
+        fill.style.width=pct+'%';
+        if(pct>=100){
+          clearInterval(iv);
+          card.classList.remove('bm-active');
+          card.classList.add('bm-done');
+          adv();
+        }
+      },55);
+    }, 280+i*430);
+  });
+
+  /* Stream logs */
+  const logStart = 280+MODS.length*430+180;
+  LOGS.forEach((line,i)=>{
+    setTimeout(()=>{
+      const d=document.createElement('div');
+      d.className='boot-log-line'+(line.cls?' '+line.cls:'');
+      const m=line.t.match(/^(.) (.*)/);
+      if(m) d.innerHTML='<span class="bll-pfx">'+m[1]+'</span>'+m[2];
+      else d.textContent=line.t;
+      document.getElementById('bm-log').appendChild(d);
+      requestAnimationFrame(()=>d.classList.add('bll-show'));
+      adv();
+    }, logStart+i*270);
+  });
+
+  /* Final typewriter */
+  const finalStart = logStart+LOGS.length*270+380;
   setTimeout(()=>{
-    document.getElementById('boot-screen').style.display='none';
-    startTyping();
-    animateCounters();
-    animateSkillBars();
-    drawRadar();
-  },800);
-},4200);
+    const fin=document.getElementById('bm-final');
+    const ft=document.getElementById('bm-final-text');
+    fin.classList.add('bf-show');
+    const msg='Neural Core Activated. System Ready.';
+    let idx=0;
+    const iv=setInterval(()=>{
+      ft.textContent=msg.slice(0,++idx);
+      if(idx>=msg.length){clearInterval(iv);adv();}
+    },36);
+  },finalStart);
+
+  /* Reveal main page */
+  const revealAt = finalStart+36*38+700;
+  setTimeout(()=>{
+    const bs=document.getElementById('boot-screen');
+    bs.style.transition='opacity 1s';
+    bs.style.opacity='0';
+    document.getElementById('bg-canvas').style.opacity='1';
+    document.getElementById('main-wrapper').style.opacity='1';
+    setTimeout(()=>{
+      bs.style.display='none';
+      startTyping();
+      animateCounters();
+      animateSkillBars();
+      drawRadar();
+    },800);
+  },revealAt);
+})();
 
 // ====== NEURAL BACKGROUND ======
 const canvas = document.getElementById('bg-canvas');
@@ -2749,7 +3001,7 @@ function drawBg() {
 drawBg();
 
 // ====== TYPING ANIMATION ======
-const roles = [  'AI Engineer','Machine Learning Developer','Data Scientist','Full Stack AI Developer','NLP Enthusiast'];
+const roles = ['AI Engineer','Machine Learning Developer','Data Scientist','Full Stack AI Developer','NLP Enthusiast'];
 let ri=0,ci=0,del=false;
 function startTyping() {
   const el = document.getElementById('typing-text');
